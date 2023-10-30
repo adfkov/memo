@@ -23,7 +23,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @Entity
-@Table(name="sns_230619_user")
+@Table(name="user")
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
@@ -34,8 +34,6 @@ public class UserEntity {
 	private String password;
 	
 	private String name;
-	@Column(name="profileImageUrl")
-	private String profileImageUrl;
 	
 	private String email;
 	@UpdateTimestamp

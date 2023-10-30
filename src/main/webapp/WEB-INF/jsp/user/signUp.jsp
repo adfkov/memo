@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-center">
 	<div class="sign-up-box">
 		<h1 class="mb-4">회원가입</h1>
-		<form id="signUpForm" method="post" action="">
+		<form id="signUpForm" method="post" action="/user/sign-up">
 			<table class="sign-up-table table table-bordered">
 				<tr>
 					<th>* 아이디(4자 이상)<br></th>
@@ -82,5 +82,75 @@
 			});
 			
 		})
+
+	
+	// 회원가입 submit
+	// signUpform 이 submit 일어날때
+	$('#signUpForm').on('submit', function(e) {
+		// action 쪽으로 넘어가는 현상: form 기능 중단
+		e.preventDefault(); // submit 기능 막음
+		
+		// validation
+		let loginId = $('#loginId').val().trim();
+		let password = $('#password').val(); // password는 space가 다 보임
+		let confirmPassword = $('#confirmPassword').val();
+		let name = $('#name').val().trim();
+		let email = $('#email').val().trim();
+		
+		if(loginId == '') {
+			alert("아이디");
+			return false;
+		}
+		if(!password || !confirmPassword) {
+			alert("비밀번호를 입력하세요.");
+			return false;
+		}
+		if( password != confirmPassword) {
+			alert("비밀번호가 일치하지 않습니다.");
+			return false;
+		}
+		if(!name) {
+			alert("이름을 입력하세요.");
+			return false;
+		}
+		if(!email) {
+			alert("이메일을 입력하세요.");
+			return false;
+		}
+		
+		// 중복확인 후 사용 가능한 지 확인 => 초록색 내용의 d-none 이 제거되어야 한다. d-none이 있을 때 얼럿
+		if($('#idCheckOk').hasClass('d-none')) {
+			alert("아이디 중복확인을 다시 해주세요.");
+			return false;
+		}
+		
+		// 서버로 보내는 방법 2가지
+		// 1) submit을 자바스크립트로 동작 시킴
+		//$(this)[0].submit(); // 화면 이동이 반드시 된다. ( jsp, redirect)
+		
+	// form 태그
+		// 2) AJAX - 응답값이 JSON
+		let url = $(this).attr('action');
+		alert(url);
+		
+		let params = $(this).serialize(); // 폼 태그에 있는 name 속성- 값으로 파라미터 구성 
+		console.log(params);
+		// 
+		$.post(url, params) // request 정보 , request body , 요청 후 응답까지 받아온다.
+		.done(function(data) { // response
+			// code: 200, result: 성공
+			if(data.code == 200) { // 성공
+				alert("가입을 환영합니다. 로그인을 해주세요.");
+				location.href = "/user/sign-in-view"; // 화면 넘기기
+			} else {
+				// 로직 실패
+				alert(data.errorMessage);
+			}
+		});
+		
+		
 	});
+	});
+		
+		
 </script>
