@@ -3,6 +3,9 @@ package com.memo.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,7 +72,46 @@ public class UserRestController {
 			result.put("result", "성공");
 		}
 		return result;
+	}
+	// 로그인 , 비밀번호 노출되면 안됨
+	/**
+	 * 
+	 * @param loginId
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+		@PostMapping("/user/sign-in")
+		public Map<String, Object> signIn(
+				@RequestParam("loginId") String loginId,
+				@RequestParam("password") String password,
+				HttpServletRequest request) {
+			
+			// 비밀번호 hashing
+			String hashedPassword = EncryptUtils.md5(password);
+			// db 조회(loginId, 해싱된 비밀번호) => null or 있음
+			UserEntity user = userBO.getUserEntityByLoginIdPassword(loginId, hashedPassword);
+
+			// 응답값 처리
+			Map<String, Object> result = new HashMap<>();
+			if(user != null) {
+				// 로그인 처리
+				HttpSession session = request.getSession();
+				session.setAttribute("userId" ,  user.getId()); // key , value / 모든 페이지에서 사용 가능한 세션 주머니
+				session.setAttribute("userName", user.getName());
+				session.setAttribute("userLoginId", user.getLoginId());
+				
+				result.put("code",200);
+				result.put("result", "성공");
+			} else {
+				// 로그인 불가
+				result.put("code", 500);
+				result.put("errorMessage", "존재하지 않는 사용자입니다.");
+			}
+			return result;
+		}
+		
 		
 	}
-}
+
 

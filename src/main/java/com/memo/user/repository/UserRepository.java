@@ -9,4 +9,6 @@ import com.memo.user.Entity.UserEntity;
 public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	// null 이거나 채워져 있거나
 	public UserEntity findByLoginId(String loginId); // 쿼리 문을 만들어라 , 단건 조회
+	
+	public UserEntity findByLoginIdAndPassword(String loginId, String password);
 }
