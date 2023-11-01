@@ -17,4 +17,5 @@ public class Post {
 	private ZonedDateTime createdAt;
 	private ZonedDateTime updatedAt;
 	
+	
 }

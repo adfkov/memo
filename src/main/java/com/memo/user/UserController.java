@@ -20,6 +20,7 @@ include/footer.jsp
 @RequestMapping("/user")
 @Controller // 화면 
 public class UserController { // 화면만 띄운다.
+	
 	@GetMapping("/sign-up-view")
 	public String singUpView(Model model) {
 		model.addAttribute("viewName", "user/signUp");

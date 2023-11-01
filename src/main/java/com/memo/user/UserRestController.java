@@ -48,6 +48,9 @@ public class UserRestController {
 		return result;
 	}
 	
+	
+	
+	
 	@PostMapping("/sign-up")
 	public Map<String, Object> signUp(
 			@RequestParam("loginId") String loginId
@@ -81,7 +84,7 @@ public class UserRestController {
 	 * @param request
 	 * @return
 	 */
-		@PostMapping("/user/sign-in")
+		@PostMapping("/sign-in")
 		public Map<String, Object> signIn(
 				@RequestParam("loginId") String loginId,
 				@RequestParam("password") String password,

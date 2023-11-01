@@ -16,4 +16,12 @@ public class PostBO {
 	public List<Post> getPostListByUserId(int userId) {
 		return postMapper.selectPostListByUserId(userId);
 	}
+	
+	public void addPostList(int userId ,String subject, String content) {
+		String imagePath = null;
+		
+		//TODO : 이미지가 있으면 업로드
+		
+		postMapper.insertPostList(userId ,subject, content , imagePath);
+	}
 }
