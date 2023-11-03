@@ -21,6 +21,11 @@ public class PostBO {
 	public List<Post> getPostListByUserId(int userId) {
 		return postMapper.selectPostListByUserId(userId);
 	}
+	// input : postId, userId output: post
+	public Post getPostByPostIdUserId(int postId, int userId) {
+		return postMapper.selectPostByPostIdUserId(postId, userId);
+	}
+	
 	
 	public void addPostList(int userId ,String userLoginId ,String subject, String content , MultipartFile file) {
 		String imagePath = null;

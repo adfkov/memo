@@ -45,7 +45,7 @@ $(document).ready(function() {
 			alert("비밀번호를 입력하세요");
 			return false;
 		}
-	}
+	
 	 // ajax
 	 // form url, params
 		let url = $(this).attr('action');

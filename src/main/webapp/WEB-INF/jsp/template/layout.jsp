@@ -21,8 +21,8 @@
 		<header class="bg-warning">
 		<jsp:include page="../include/header.jsp" /> <!--  상대경로 ../--><!-- 절대경로 webapp부터 쭉 -->
 		</header>
-		<section class="contents">
-			<jsp:include page="../${viewName}.jsp" /> <!--  계속 바뀌게 model에 담아서-->
+		<section class="contents my-5">
+				<jsp:include page="../${viewName}.jsp" /> <!--  계속 바뀌게 model에 담아서-->
 		</section>
 		<footer class="bg-warning">
 		<jsp:include page="../include/footer.jsp" />

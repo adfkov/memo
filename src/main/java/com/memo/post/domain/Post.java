@@ -2,11 +2,14 @@ package com.memo.post.domain;
 
 import java.util.Date;
 
+import javax.persistence.Table;
+
 import lombok.Data;
 import lombok.ToString;
 
 @ToString
 @Data
+@Table(name="post")
 public class Post {
 	
 	private int id;
