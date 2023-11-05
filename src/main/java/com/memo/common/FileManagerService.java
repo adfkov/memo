@@ -34,7 +34,8 @@ public class FileManagerService {
 		
 		// 폴더 내에 파일 업로드 : byte 단위로 업로드
 		try {
-			byte[] bytes = file.getBytes();
+			byte[] bytes;
+			bytes = file.getBytes();
 			// ★★★★★★★★★★★★★★★★★★ 한글 이름 이미지는 올릴 수 없으므로 나중에 영문자로 바꿔서 올리기 : 로직 구현 개인프로젝트에서는
 			Path path = Paths.get(filePath+ "/" + file.getOriginalFilename()); // 디렉토리 경로 + 사용자가 올린 파일명
 			Files.write(path, bytes); // 파일 업로드
