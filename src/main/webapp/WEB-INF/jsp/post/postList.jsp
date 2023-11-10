@@ -34,7 +34,16 @@
 		</c:forEach>
 	</tbody>
 </table>
-	
+
+	<%-- paging --%>
+	<div class="text-center">
+		<c:if test="${prevId ne 0}">
+		<a href="/post/post-list-view?prevId=${prevId}" class="mr-5">&lt;&lt; 이전</a>
+		</c:if>
+		<c:if test="${nextId ne 0}">
+		<a href="/post/post-list-view?nextId=${nextId}">다음 &gt;&gt;</a>
+		</c:if>
+	</div>
 	<div class="d-flex justify-content-end"> 
 		<a class="btn btn-warning" href="/post/post-create-view">글쓰기</a>
 	</div>
